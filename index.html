@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Paper Scissors</title>
+    <style>
+        body {
+  font-family: monospace;
+  font-size: 20px;
+  text-align: center;
+  background: black;
+  color: lime;
+}
+    </style>
+</head>
+<body>
+    <h1>Rock, Paper & Scissors</h1>
+    <p>Rock Beats Scissors, Paper beats Rock, Scissors beat paper</p>
+    <div class="scoreboard">
+        <div>
+            <p id="your-score">0</p>
+            <p>You</p>
+        </div>
+        <div >
+            <p id="computer-score">0</p>
+            <p>Computer</p>
+        </div>
+    </div>
+    <div class="your-options">
+        <button id="rock">Rock</button>
+        <button id="paper">Paper</button>
+        <button id="scissors">Scissors</button>
+    </div>
+    <div id="result" class="result">
+        Let the games begin!!
+    </div>
+</body>
+</html>
+<script>
+    (function f(){
+        console.log("I am in the console.");
+        const rockButton = document.getElementById("rock"); 
+        const paperButton = document.getElementById("paper"); 
+        const scissorsButton = document.getElementById("scissors"); 
+        const resultElement = document.getElementById("result"); 
+        const yourScoreHTML = document.getElementById("your-score"); 
+        const computerScoreHTML = document.getElementById("computer-score"); 
+
+        let yourScore = 0, computerScore = 0; 
+        function gamingEngine(yourMove) {
+            const moves = ["rock", "paper", "scissors"]; 
+            let computerMove = Math.floor(Math.random() * 3); 
+            computerMove = moves[computerMove]; 
+            if (yourMove === "rock") {
+                if (computerMove == "paper") {
+                    computerScore++;
+                } else if (computerMove == "scissors") {
+                    yourScore++; 
+                } else {
+                    // Tie
+                }
+            } else if (yourMove === "paper") {
+                if (computerMove == "scissors") {
+                    computerScore++;
+                } else if (computerMove == "rock") {
+                    yourScore++; 
+                } else {
+                    // Tie
+                }
+            } else {
+                if (computerMove == "paper") {
+                    yourScore++; 
+                } else if (computerMove == "rock") {
+                    computerScore++; 
+                } else {
+                    // Tie
+                }
+            }
+            // 0 - Rock, 1 - Paper, 2 - Scissors. 
+            // Rock beats Scissors 0 vs 2 => 0
+            // Paper beats Rock 1 vs 0 => 1
+            // Scissors beats Paper 2 vs 1 => 2
+            resultElement.innerHTML = `You played ${yourMove} & computer played ${computerMove}`;
+            yourScoreHTML.innerHTML = `${yourScore}`
+            computerScoreHTML.innerHTML = `${computerScore}`
+            console.log(yourScore, computerScore);
+        }
+        rockButton.addEventListener("click", () => {
+            console.log("rock is played");
+            gamingEngine("rock"); 
+        })
+        paperButton.addEventListener("click", () => {
+            console.log("paper is played");
+            gamingEngine("paper"); 
+
+        })
+        scissorsButton.addEventListener("click", () => {
+            console.log("scissors is played");
+            gamingEngine("scissors"); 
+        })
+    })();
+</script>
